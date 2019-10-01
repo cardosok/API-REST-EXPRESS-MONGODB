@@ -5,17 +5,14 @@ require('dotenv/config')
 const bodyParser = require('body-parser');
 const cors = require('cors');
 
-
 app.use(cors())
 app.use(bodyParser.json());
 
 //Import Routes
-const postsRoutes = require('./routes/posts')
-
+const hortaRoutes = require('./routes/hortaRoutes');
 
 //Middlewares
-app.use('/posts', postsRoutes);
-//app.use('/user', user);
+app.use('/horta', hortaRoutes);
 
 //Connect to MongoDB
 mongoose.connect(process.env.DB_CONNECTION,
@@ -27,6 +24,5 @@ mongoose.connect(process.env.DB_CONNECTION,
     console.log('Connected to mongoDB');    
 });
 
-
-//How to start listening a serve
+//Ouvindo na porta 3000
 app.listen(3000);
