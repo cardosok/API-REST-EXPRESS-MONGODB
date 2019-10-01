@@ -12,10 +12,10 @@ app.use(bodyParser.json());
 //Import Routes
 const postsRoutes = require('./routes/posts')
 
+
 //Middlewares
 app.use('/posts', postsRoutes);
 //app.use('/user', user);
-
 
 //Connect to MongoDB
 mongoose.connect(process.env.DB_CONNECTION,
