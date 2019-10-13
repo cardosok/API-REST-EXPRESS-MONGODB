@@ -13,15 +13,14 @@ router.get('/', async (req,res)=>{
 });
 
 router.post('/', async(req,res)=>{
-    const posts = new hortaModel({
-        umidadeDoSolo: req.body.umidadeDoSolo,
-        umidadeDoAr: req.boby.umidadeDoAr,
-        temperaturaDoAr: req.body.temperaturaDoAr,
-        nivelTanque: req.body.nivelTanque
-    });
     
+    const horta = new hortaModel({
+        umidadeDoSolo: req.body.umidadeDoSolo,
+        temperaturaDoAr: req.body.temperaturaDoAr,
+        umidade: req.body.umidade
+    });
     try{
-        const hortaSaved = await hortaModel.save();
+        const hortaSaved = await horta.save();
         res.status(200).json(hortaSaved);
     }catch(err){
         res.status(500).json({message : err});

@@ -4,6 +4,7 @@ const app = express();
 require('dotenv/config')
 const bodyParser = require('body-parser');
 const cors = require('cors');
+const clientTCP = require('./clientTCP');
 
 app.use(cors())
 app.use(bodyParser.json());
@@ -12,7 +13,7 @@ app.use(bodyParser.json());
 const hortaRoutes = require('./routes/hortaRoutes');
 
 //Middlewares
-app.use('/horta', hortaRoutes);
+app.use('', hortaRoutes);
 
 //Connect to MongoDB
 mongoose.connect(process.env.DB_CONNECTION,
