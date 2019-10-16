@@ -5,6 +5,8 @@ const hortaModel = require('../models/horta');
 //ROUTES
 router.get('/', async (req,res)=>{
     try {
+        console.log("chamei");
+        
         const listHorta = await hortaModel.find();
         res.status(200).json(listHorta);
     } catch (error) {
