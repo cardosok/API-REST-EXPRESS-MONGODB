@@ -62,6 +62,24 @@ router.delete('/:hortaId',async (req,res) =>{
         res.status(500).json({message: error})
     }
 });
+router.post('/data',async (req,res) =>{
+    try {
+        data_final = req.body.Data_Final;
+        data_inicial = req.body.Data_Inicial;
+        const updateHorta = await hortaModel.find().where('date')
+                .gt(new Date(data_inicial))
+                .lt(new Date(data_final))
+                .exec((err, val)=>{
+                    if(err){
+                        res.status(500).json({message: error})                
+                    }else{
+                        res.status(200).json(val);     
+                    }
+                });
+    } catch (error) {
+        res.status(500).json({message: error})
+    }
+});
 /*
 //UpdateData
 router.patch('/:hortaId',async (req,res) =>{
@@ -82,4 +100,5 @@ router.patch('/:hortaId',async (req,res) =>{
     }
 });
 */
+
 module.exports = router;
