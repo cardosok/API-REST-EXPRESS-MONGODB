@@ -1,6 +1,18 @@
 const express = require('express')
 const router = express.Router();
+const moment = require('moment-timezone');
+
+
 const hortaModel = require('../models/horta');
+
+
+
+function formatDate(){
+    var date = moment.utc();
+    var local = moment(date).local();
+    console.log(local.toDate());
+    return local.toDate();
+}
 
 //ROUTES
 router.get('/', async (req,res)=>{
@@ -15,14 +27,18 @@ router.get('/', async (req,res)=>{
 });
 
 router.post('/', async(req,res)=>{
+    teste = await formatDate();
+    console.log("teste "+teste);
     
     const horta = new hortaModel({
         umidadeDoSolo: req.body.umidadeDoSolo,
         temperaturaDoAr: req.body.temperaturaDoAr,
-        umidade: req.body.umidade
+        umidade: req.body.umidade,
+        date: teste
     });
     try{
         const hortaSaved = await horta.save();
+        console.log("salvei");
         res.status(200).json(hortaSaved);
     }catch(err){
         res.status(500).json({message : err});
