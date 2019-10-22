@@ -64,9 +64,15 @@ router.delete('/:hortaId',async (req,res) =>{
 });
 router.post('/data',async (req,res) =>{
     try {
-        data_final = req.body.Data_Final;
-        data_inicial = req.body.Data_Inicial;
-        const updateHorta = await hortaModel.find().where('date')
+        data_inicial = new Date(new Date().setFullYear(new Date().getFullYear() - 1));
+        data_final = new Date(new Date().setFullYear(new Date().getFullYear() + 1));
+        // console.log(req.body.Data_Final);
+        console.log(req.body);
+        if(req.body.Data_Inicial != '' && req.body.Data_Final != ''){
+            data_final = req.body.Data_Final;
+            data_inicial = req.body.Data_Inicial;
+        }
+        await hortaModel.find().where('date')
                 .gt(new Date(data_inicial))
                 .lt(new Date(data_final))
                 .exec((err, val)=>{
