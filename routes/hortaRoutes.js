@@ -29,7 +29,6 @@ router.get('/', async (req,res)=>{
 router.post('/', async(req,res)=>{
     teste = await formatDate();
     console.log("teste "+teste);
-    
     const horta = new hortaModel({
         umidadeDoSolo: req.body.umidadeDoSolo,
         temperaturaDoAr: req.body.temperaturaDoAr,
@@ -86,25 +85,4 @@ router.post('/data',async (req,res) =>{
         res.status(500).json({message: error})
     }
 });
-/*
-//UpdateData
-router.patch('/:hortaId',async (req,res) =>{
-    try {
-        const updateHorta = await hortaModel.updateOne(
-            { _id: req.params.hortaId},
-            { $set: { 
-                    umidadeDoSolo: req.body.umidadeDoSolo,
-                    umidadeDoAr: req.boby.umidadeDoAr,
-                    temperaturaDoAr: req.body.temperaturaDoAr,
-                    nivelTanque: req.body.nivelTanque
-                }
-            }
-        );
-        res.status(200).json(updateHorta);
-    } catch (error) {
-        res.status(500).json({message: error})
-    }
-});
-*/
-
 module.exports = router;
